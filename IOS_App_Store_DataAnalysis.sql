@@ -52,10 +52,9 @@ from AppleStore
 -- Looking to see if paid applications on average have a higher or lower user rating
 
 Select case
-			when price > 0 Then 'Paid'
-            else 'Free'
-	end as Application_Type, 
-	avg(user_rating) as Average_Rating
+	when price > 0 Then 'Paid'
+        else 'Free'
+end as Application_Type, avg(user_rating) as Average_Rating
 from AppleStore
 group by Application_Type
 
@@ -63,11 +62,10 @@ group by Application_Type
 -- have a higher or lower user rating
 
 Select case 
-		when lang_num < 10 then '<10 languages'
+	when lang_num < 10 then '<10 languages'
         when lang_num between 10 and 30 then '10-30 languages'
         else '>30 languages'
-      end as LanguageAmount,
-      avg(user_rating) as Average_Rating
+end as LanguageAmount, avg(user_rating) as Average_Rating
 from AppleStore
 group by LanguageAmount
 order by Average_Rating desc 
@@ -84,11 +82,10 @@ limit 10
 -- Does the length of the application description have an impact on average user ratings
 
 Select CASE
-		when length(b.app_desc) <500 Then 'Short'
+	when length(b.app_desc) <500 Then 'Short'
         when length(b.app_desc) between 500 and 1000 then 'Medium'
         else 'Long'
-     end as App_Description_Length, 
-     avg(user_rating) as User_Rating 
+end as App_Description_Length, avg(user_rating) as User_Rating 
 
 from AppleStore as a
 
